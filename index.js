@@ -4,14 +4,13 @@ import pg from "pg";
 import axios from "axios";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "book-notes",
-  password: "1234",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 db.connect();
